@@ -1,32 +1,24 @@
-export default function Index() {
+import Emoji from "~/components/emoji";
+import Logo from "~/components/logo";
+
+export default function HomePage() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div>
+      <h1 className="sr-only">ZHE.DEV</h1>
+      <Logo classname="mb-20" />
+      <p className="mb-20 text-4xl font-extrabold">
+        <Emoji emoji="👋" />
+        Hello, I'm Zhe.
+      </p>
+      <p className="font-bold">Web Developer.</p>
+      <p>
+        Love to help people create opportunities and solve problems with ideas
+        <Emoji emoji="💡" />, pixels
+        <Emoji emoji="💎" />, codes
+        <Emoji emoji="👨‍💻" />
+        and technologies
+        <Emoji emoji="🚀" />.
+      </p>
     </div>
   );
 }
