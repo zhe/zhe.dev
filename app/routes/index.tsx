@@ -5,11 +5,8 @@ export default function HomePage() {
   return (
     <div>
       <h1 className="sr-only">ZHE.DEV</h1>
-      <Logo classname="mb-20" />
-      <p className="mb-20 text-4xl font-extrabold">
-        <Emoji emoji="👋" />
-        Hello, I'm Zhe.
-      </p>
+      <Logo className="mb-4" />
+      <p className="mb-20 text-4xl font-extrabold">Zhe.</p>
       <p className="font-bold">Web Developer.</p>
       <p>
         Love to help people create opportunities and solve problems with ideas
