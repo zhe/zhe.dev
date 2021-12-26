@@ -1,4 +1,4 @@
-import type { MetaFunction } from "remix";
+import { Link, MetaFunction } from "remix";
 import {
   Links,
   LiveReload,
@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration
 } from "remix";
+import Logo from "./components/logo";
 import styles from "./styles/tailwind.css";
 
 export function links() {
@@ -26,11 +27,30 @@ export default function App() {
         <Links />
       </head>
       <body className="p-8 antialiased bg-white text-neutral-800 dark:bg-neutral-900 dark:text-neutral-50">
-        <Outlet />
+        <Layout>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
+  );
+}
+
+function Layout({ children }: React.PropsWithChildren<{}>) {
+  return (
+    <>
+      <header className="mb-20">
+        <Link to="/" title="Zhe.Dev">
+          <Logo className="mb-4" />
+        </Link>
+        <p className="text-4xl font-extrabold">Zhe.</p>
+      </header>
+      <main className="mb-20">{children}</main>
+      <footer className="text-neutral-300 text-sm">
+        <p>&copy; Zhe Zhang</p>
+      </footer>
+    </>
   );
 }

@@ -9,7 +9,7 @@ const Emoji = ({
   className?: string;
 }) => (
   <span
-    className="inline-block mx-[.2em] h-[1.2em] w-[1.2em] align-[-0.2em]"
+    className="inline-block mx-[.1em] h-[1.2em] w-[1.2em] align-[-0.2em]"
     dangerouslySetInnerHTML={{
       __html: twemoji.parse(emoji, {
         ext: ".svg",
