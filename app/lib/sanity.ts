@@ -21,7 +21,7 @@ export const sanity = (
     dataset,
     apiVersion: "2021-03-25", // use current UTC date - see "specifying API version"!
     token: "", // or leave blank for unauthenticated usage
-    useCdn: false // `false` if you want to ensure fresh data
+    useCdn: process.env.NODE_ENV === "production" ? true : false // `false` if you want to ensure fresh data
   };
 
   return sanityClient(config);

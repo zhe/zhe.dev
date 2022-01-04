@@ -40,7 +40,7 @@
     "wrangler": "^0.0.0-8ab7d2e"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "sideEffects": false,
   "main": "dist/worker.js"
