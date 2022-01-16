@@ -30,9 +30,9 @@ export default function HomePage() {
 
   return (
     <div>
-      <div className="text-4xl font-extrabold mb-4">
+      <div className="mb-4 text-4xl font-extrabold">
         <p className="mb-2">Web Developer.</p>
-        <hr className="border-t-2 border-neutral-100 rounded w-10 my-4" />
+        <hr className="w-10 my-4 border-t-2 rounded border-neutral-100" />
         <p>
           I love to help
           <br /> people and business
@@ -47,7 +47,7 @@ export default function HomePage() {
       </div>
       {notes?.length > 0 && (
         <>
-          <h2 className="font-bold mb-1">
+          <h2 className="mb-1 font-bold">
             <Link to="notes">Notes</Link>
           </h2>
           <ul className="list-['>'] list-inside marker:text-sky-400">
@@ -55,11 +55,11 @@ export default function HomePage() {
               <li key={note._id}>
                 <Link
                   to={`notes/${note.slug.current}`}
-                  className="text-sky-800 hover:text-sky-700 mx-4 hover:underline active:translate-y-px"
+                  className="mx-4 text-sky-800 hover:text-sky-700 hover:underline active:translate-y-px"
                 >
                   {note.title}
                 </Link>
-                <span className="text-neutral-200 text-sm">
+                <span className="text-sm text-neutral-200">
                   {format(parseISO(note.publishedAt), "yyyy-MM-dd")}
                 </span>
               </li>
