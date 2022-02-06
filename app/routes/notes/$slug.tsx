@@ -1,7 +1,7 @@
 import { Cloudinary, Transformation } from "@cloudinary/url-gen";
 import { source } from "@cloudinary/url-gen/actions/overlay";
 import { minimumPad } from "@cloudinary/url-gen/actions/resize";
-import { center, southEast } from "@cloudinary/url-gen/qualifiers/compass";
+import { center, east, west } from "@cloudinary/url-gen/qualifiers/compass";
 import { compass } from "@cloudinary/url-gen/qualifiers/gravity";
 import { Position } from "@cloudinary/url-gen/qualifiers/position";
 import { image, text } from "@cloudinary/url-gen/qualifiers/source";
@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params, context }) => {
     context.SANITY_PROJECT_ID,
     context.SANITY_DATASET
   ).fetch(
-    `*[_type == "note" && slug.current == $slug][0]{title, body, 'authorName': author->name, 'authorImage': author->image, mainImage}`,
+    `*[_type == "note" && slug.current == $slug][0]{title, body, publishedAt, _updatedAt, 'authorName': author->name, 'authorImage': author->image, mainImage}`,
     {
       slug: params.slug
     }
@@ -41,35 +41,47 @@ export const loader: LoaderFunction = async ({ params, context }) => {
 
   // cloudinary.image returns a CloudinaryImage with the configuration set.
   const ogImage = cloudinary
-    .image(builder.image(note.mainImage.asset).width(400).height(400).url())
+    .image(builder.image(note.mainImage.asset).width(640).height(640).url())
     .setDeliveryType("fetch");
 
   ogImage
-    .resize(minimumPad().width(1200).height(630).gravity(compass(southEast())))
+    .resize(minimumPad().width(1280).height(640).gravity(compass(east())))
     .overlay(
       source(
         image(
-          "v1642323117/zhe.dev/zhe-dev-og-image-template_kv4nhj.png"
+          "v1642323117/zhe.dev/zhe-dev-og-image-template_phybdz.png"
         ).transformation(new Transformation())
       ).position(
         new Position().gravity(compass(center())).offsetX(0).offsetY(0)
       )
     )
-    .overlay(
-      source(
+    .addTransformation(
+      // see: https://github.com/cloudinary/js-url-gen/issues/430#issuecomment-913222894
+      `w_510,c_fit,${source(
         text(
           note.title,
           new TextStyle("Roboto", 56).fontWeight("black")
         ).textColor("white")
-      ).position(new Position().gravity(compass(center())))
+      )
+        .position(new Position().gravity(compass(west())).offsetX(105))
+        .toString()}`
     )
     .format("png");
 
   return { note: note, ogImageUrl: ogImage.toURL() };
 };
 
-export const meta: MetaFunction = ({ data }) => {
+export const meta: MetaFunction = ({ data, params }) => {
   return {
+    "og:title": data.note.title,
+    "og:url": `https://zhe.dev/notes/${params.slug}`,
+    "og:article:published_time": data.note.publishedAt,
+    "og:article:modified_time": data.note._updatedAt,
+    "og:article:author": "zhe",
+    "og:image": data.ogImageUrl,
+    "og:image:type": "image/jpeg",
+    "og:image:width": "1280",
+    "og:image:height": "640",
     "twitter:image": data.ogImageUrl,
     "twitter:card": "summary_large_image",
     "twitter:creator": "@zhzhng",

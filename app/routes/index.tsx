@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { Link } from "react-router-dom";
+import { Link } from "Remix";
 import type { LoaderFunction } from "remix";
 import { useLoaderData } from "remix";
 import Emoji from "~/components/emoji";

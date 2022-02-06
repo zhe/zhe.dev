@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { Link } from "react-router-dom";
+import { Link } from "Remix";
 import type { LoaderFunction } from "remix";
 import { useLoaderData } from "remix";
 import { sanity } from "~/lib/sanity";
@@ -29,8 +29,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className="text-4xl font-extrabold mb-4">Notes</h1>
-      <hr className="border-t-2 border-neutral-100 rounded w-10 my-4" />
+      <h1 className="mb-4 text-4xl font-extrabold">Notes</h1>
+      <hr className="w-10 my-4 border-t-2 rounded border-neutral-100" />
       {notes?.length > 0 && (
         <>
           <ul className="list-['>'] list-inside marker:text-sky-400">
@@ -38,11 +38,11 @@ export default function HomePage() {
               <li key={note._id}>
                 <Link
                   to={`${note.slug.current}`}
-                  className="text-sky-800 hover:text-sky-700 mx-4 hover:underline active:translate-y-px"
+                  className="mx-4 text-sky-800 hover:text-sky-700 hover:underline active:translate-y-px"
                 >
                   {note.title}
                 </Link>
-                <span className="text-neutral-300 text-sm">
+                <span className="text-sm text-neutral-300">
                   {format(parseISO(note.publishedAt), "yyyy-MM-dd")}
                 </span>
               </li>
