@@ -1,7 +1,6 @@
 import { format, parseISO } from "date-fns";
-import { Link } from "Remix";
 import type { LoaderFunction } from "remix";
-import { useLoaderData } from "remix";
+import { Link, useLoaderData } from "remix";
 import { sanity } from "~/lib/sanity";
 
 type Note = {
