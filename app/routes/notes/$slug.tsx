@@ -102,6 +102,9 @@ export default function Movie() {
         alt="Note's Main Image"
         className="mb-4 rounded-lg"
       />
+      <div className="prose-sm prose prose-p:text-neutral-500 prose-a:text-neutral-500 prose-neutral">
+        <BlockContent blocks={note.mainImage.caption} />
+      </div>
       <article className="prose prose-neutral dark:prose-invert">
         <BlockContent blocks={note.body} />
       </article>

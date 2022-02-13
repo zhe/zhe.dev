@@ -29,7 +29,18 @@ export default {
       type: "image",
       options: {
         hotspot: true
-      }
+      },
+      fields: [
+        {
+          name: "caption",
+          title: "Caption",
+          type: "array",
+          of: [{ type: "block" }],
+          options: {
+            isHighlighted: true // <-- make this field easily accessible
+          }
+        }
+      ]
     },
     {
       name: "categories",
