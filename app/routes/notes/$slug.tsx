@@ -13,10 +13,7 @@ import { useLoaderData } from "remix";
 import { sanity } from "~/lib/sanity";
 
 export const loader: LoaderFunction = async ({ params, context }) => {
-  const note = await sanity(
-    context.SANITY_PROJECT_ID,
-    context.SANITY_DATASET
-  ).fetch(
+  const note = await context.sanity.fetch(
     `*[_type == "note" && slug.current == $slug][0]{title, body, publishedAt, _updatedAt, 'authorName': author->name, 'authorImage': author->image, mainImage}`,
     {
       slug: params.slug

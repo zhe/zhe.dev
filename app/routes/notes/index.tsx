@@ -13,17 +13,14 @@ type Note = {
 };
 
 export const loader: LoaderFunction = async ({ context }) => {
-  const notes = await sanity(
-    context.SANITY_PROJECT_ID,
-    context.SANITY_DATASET
-  ).fetch(
+  const notes = await context.sanity.fetch(
     `*[_type == "note"]{ _id, title, slug, publishedAt } | order(publishedAt desc)`
   );
 
   return { notes };
 };
 
-export default function HomePage() {
+export default function NotesPage() {
   let { notes } = useLoaderData<{ notes: Note[] }>();
 
   return (

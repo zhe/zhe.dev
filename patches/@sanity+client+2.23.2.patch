@@ -1,0 +1,14 @@
+diff --git a/node_modules/@sanity/client/package.json b/node_modules/@sanity/client/package.json
+index 993fa34..f49af6d 100644
+--- a/node_modules/@sanity/client/package.json
++++ b/node_modules/@sanity/client/package.json
+@@ -21,6 +21,9 @@
+     "./src/http/nodeMiddleware.js": "./src/http/browserMiddleware.js",
+     "./lib/http/nodeMiddleware.js": "./lib/http/browserMiddleware.js"
+   },
++  "exports": {
++     "default": "./umd/sanityClient.js"
++  },
+   "dependencies": {
+     "@sanity/eventsource": "2.23.0",
+     "@sanity/generate-help-url": "2.18.0",

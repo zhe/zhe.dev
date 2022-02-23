@@ -2,7 +2,6 @@ import { format, parseISO } from "date-fns";
 import type { LoaderFunction } from "remix";
 import { Link, useLoaderData } from "remix";
 import Emoji from "~/components/emoji";
-import { sanity } from "~/lib/sanity";
 
 type Note = {
   _id: string;
@@ -14,10 +13,7 @@ type Note = {
 };
 
 export const loader: LoaderFunction = async ({ context }) => {
-  const notes = await sanity(
-    context.SANITY_PROJECT_ID,
-    context.SANITY_DATASET
-  ).fetch(
+  const notes = await context.sanity.fetch(
     `*[_type == "note"]{ _id, title, slug, publishedAt } | order(publishedAt desc)`
   );
 

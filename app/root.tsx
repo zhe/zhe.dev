@@ -1,5 +1,6 @@
-import { Link, MetaFunction } from "remix";
+import type { MetaFunction } from "remix";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -32,7 +33,7 @@ export default function App() {
         </Layout>
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <LiveReload />
       </body>
     </html>
   );
@@ -48,7 +49,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
         <p className="text-4xl font-extrabold">Zhe.</p>
       </header>
       <main className="mb-20">{children}</main>
-      <footer className="text-neutral-300 text-sm">
+      <footer className="text-sm text-neutral-300">
         <p>&copy; Zhe Zhang</p>
       </footer>
     </>
