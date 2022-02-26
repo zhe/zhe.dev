@@ -65,7 +65,12 @@ export const loader: LoaderFunction = async ({ params, context }) => {
     )
     .format("png");
 
-  return { note: note, ogImageUrl: ogImage.toURL() };
+  return {
+    note: note,
+    ogImageUrl: ogImage.toURL(),
+    sanityProjectId: context.SANITY_PROJECT_ID,
+    sanityDataset: context.SANITY_DATASET
+  };
 };
 
 export const meta: MetaFunction = ({ data, params }) => {
@@ -87,8 +92,8 @@ export const meta: MetaFunction = ({ data, params }) => {
   };
 };
 
-export default function Movie() {
-  let { note } = useLoaderData();
+export default function Note() {
+  let { note, sanityProjectId, sanityDataset } = useLoaderData();
 
   return (
     <div>
@@ -103,7 +108,11 @@ export default function Movie() {
         <BlockContent blocks={note.mainImage.caption} />
       </div>
       <article className="prose prose-neutral dark:prose-invert">
-        <BlockContent blocks={note.body} />
+        <BlockContent
+          projectId={sanityProjectId}
+          dataset={sanityDataset}
+          blocks={note.body}
+        />
       </article>
     </div>
   );
