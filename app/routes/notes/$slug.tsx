@@ -6,7 +6,7 @@ import { compass } from "@cloudinary/url-gen/qualifiers/gravity";
 import { Position } from "@cloudinary/url-gen/qualifiers/position";
 import { image, text } from "@cloudinary/url-gen/qualifiers/source";
 import { TextStyle } from "@cloudinary/url-gen/qualifiers/textStyle";
-import BlockContent from "@sanity/block-content-to-react";
+import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import type { LoaderFunction, MetaFunction } from "remix";
 import { useLoaderData } from "remix";
@@ -104,14 +104,31 @@ export default function Note() {
         alt="Note's Main Image"
         className="mb-4 rounded-lg"
       />
-      <div className="prose-sm prose prose-p:text-neutral-500 prose-a:text-neutral-500 prose-neutral">
-        <BlockContent blocks={note.mainImage.caption} />
+      <div className="mb-4 prose-sm prose prose-p:text-neutral-500 prose-a:text-neutral-500 prose-neutral">
+        <PortableText value={note.mainImage.caption} />
       </div>
       <article className="prose prose-neutral dark:prose-invert">
-        <BlockContent
-          projectId={sanityProjectId}
-          dataset={sanityDataset}
-          blocks={note.body}
+        <PortableText
+          value={note.body}
+          components={{
+            types: {
+              image: ({ value }) => (
+                <img
+                  src={imageUrlBuilder({
+                    projectId: sanityProjectId,
+                    dataset: sanityDataset
+                  })
+                    .image(value)
+                    .width(800)
+                    .fit("max")
+                    .auto("format")
+                    .url()}
+                  alt={value.alt || " "}
+                  loading="lazy"
+                />
+              )
+            }
+          }}
         />
       </article>
     </div>
