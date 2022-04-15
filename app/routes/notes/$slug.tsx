@@ -7,9 +7,9 @@ import { Position } from "@cloudinary/url-gen/qualifiers/position";
 import { image, text } from "@cloudinary/url-gen/qualifiers/source";
 import { TextStyle } from "@cloudinary/url-gen/qualifiers/textStyle";
 import { PortableText } from "@portabletext/react";
+import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
 import imageUrlBuilder from "@sanity/image-url";
-import type { LoaderFunction, MetaFunction } from "remix";
-import { useLoaderData } from "remix";
 import { sanity } from "~/lib/sanity";
 
 export const loader: LoaderFunction = async ({ params, context }) => {

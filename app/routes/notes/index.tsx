@@ -1,7 +1,6 @@
+import type { LoaderFunction } from "@remix-run/cloudflare";
+import { Link, useLoaderData } from "@remix-run/react";
 import { format, parseISO } from "date-fns";
-import type { LoaderFunction } from "remix";
-import { Link, useLoaderData } from "remix";
-import { sanity } from "~/lib/sanity";
 
 type Note = {
   _id: string;

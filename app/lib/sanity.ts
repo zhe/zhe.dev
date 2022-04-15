@@ -1,5 +1,4 @@
 import sanityClient from "@sanity/client";
-import type { LoaderFunction } from "remix";
 
 // Standard client for fetching data
 

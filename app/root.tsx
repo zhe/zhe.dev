@@ -1,4 +1,4 @@
-import type { MetaFunction } from "remix";
+import type { MetaFunction } from "@remix-run/cloudflare";
 import {
   Link,
   Links,
@@ -7,7 +7,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration
-} from "remix";
+} from "@remix-run/react";
 import Logo from "./components/logo";
 import styles from "./styles/tailwind.css";
 
